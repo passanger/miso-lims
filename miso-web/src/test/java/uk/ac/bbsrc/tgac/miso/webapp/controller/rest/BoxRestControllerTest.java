@@ -66,7 +66,7 @@ public class BoxRestControllerTest {
 
     ScanRequest request = new ScanRequest();
     request.setScannerName(scannerName);
-    assertTrue(sut.getBoxScan(1, request).getJSONArray("errors").size() > 0);
+    assertTrue(sut.getBoxScan(1, request).getErrors().size() > 0);
   }
 
   private Box makeEmptyBox() {
