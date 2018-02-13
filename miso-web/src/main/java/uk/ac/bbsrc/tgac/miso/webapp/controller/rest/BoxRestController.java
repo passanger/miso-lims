@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import net.sf.json.JSONObject;
@@ -325,7 +327,8 @@ public class BoxRestController extends RestController {
    * 
    * @param requestData
    */
-  @RequestMapping(value = "/rest/box/prepare-scanner", method = RequestMethod.POST)
+  @RequestMapping(value = "/box/prepare-scan", method = RequestMethod.POST)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void prepareBoxScanner(@RequestBody(required = true) ScannerPreparationRequest requestData) {
     if (requestData.getRows() == null || requestData.getColumns() == null) {
       throw new RestException("Box size not specified", Status.BAD_REQUEST);
@@ -470,7 +473,7 @@ public class BoxRestController extends RestController {
    *         (if
    *         applicable)
    */
-  @RequestMapping(value = "/rest/box/{boxId}/scan/", method = RequestMethod.POST)
+  @RequestMapping(value = "/box/{boxId}/scan/", method = RequestMethod.POST)
   public @ResponseBody ScanResultsDto getBoxScan(@PathVariable(required = true) int boxId,
       @RequestBody(required = true) ScanRequest requestData) {
     try {
