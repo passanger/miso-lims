@@ -128,6 +128,7 @@ import uk.ac.bbsrc.tgac.miso.core.data.impl.view.BoxableView;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.view.PoolableElementView;
 import uk.ac.bbsrc.tgac.miso.core.data.spreadsheet.SpreadSheetFormat;
 import uk.ac.bbsrc.tgac.miso.core.data.spreadsheet.Spreadsheet;
+import uk.ac.bbsrc.tgac.miso.core.data.type.ConsentLevel;
 import uk.ac.bbsrc.tgac.miso.core.data.type.HealthType;
 import uk.ac.bbsrc.tgac.miso.core.data.type.InstrumentType;
 import uk.ac.bbsrc.tgac.miso.core.data.type.KitType;
@@ -672,6 +673,9 @@ public class Dtos {
     SampleIdentityDto dto = new SampleIdentityDto();
     dto.setExternalName(from.getExternalName());
     dto.setDonorSex(from.getDonorSex().getLabel());
+    if (from.getConsentLevel() != null) {
+      dto.setConsentLevel(from.getConsentLevel().getLabel());
+    }
     return dto;
   }
 
@@ -680,6 +684,9 @@ public class Dtos {
     to.setExternalName(from.getExternalName());
     if (from.getDonorSex() != null) {
       to.setDonorSex(from.getDonorSex());
+    }
+    if (from.getConsentLevel() != null) {
+      to.setConsentLevel(ConsentLevel.getByLabel(from.getConsentLevel()));
     }
     return to;
   }

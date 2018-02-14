@@ -327,6 +327,18 @@
                 </c:choose>
               </td>
             </tr>
+            <tr>
+              <td class="h">Consent:</td>
+              <td>
+                <form:select id="consentLevel" path="consentLevel">
+                  <c:forEach var="consentLevelOption" items="${consentLevelOptions}">
+                    <option value="${consentLevelOption}" <c:if test="${sample.consentLevel == consentLevelOption}">selected="selected"</c:if>>
+                      ${consentLevelOption.label}
+                    </option>
+                  </c:forEach>
+                </form:select>
+              </td>
+            </tr>
           </table>
         </div>
       </c:if>

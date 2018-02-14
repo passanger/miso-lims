@@ -101,6 +101,7 @@ import uk.ac.bbsrc.tgac.miso.core.data.impl.SubprojectImpl;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.TissueMaterialImpl;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.TissueOriginImpl;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.TissueTypeImpl;
+import uk.ac.bbsrc.tgac.miso.core.data.type.ConsentLevel;
 import uk.ac.bbsrc.tgac.miso.core.data.type.StrStatus;
 import uk.ac.bbsrc.tgac.miso.core.security.util.LimsSecurityUtils;
 import uk.ac.bbsrc.tgac.miso.core.service.naming.NamingScheme;
@@ -473,6 +474,11 @@ public class EditSampleController {
   @ModelAttribute("strStatusOptions")
   public StrStatus[] getStrStatusOptions() {
     return StrStatus.values();
+  }
+
+  @ModelAttribute("consentLevelOptions")
+  public ConsentLevel[] getConsentLevelOptions() {
+    return ConsentLevel.values();
   }
 
   @ModelAttribute("donorSexOptions")
