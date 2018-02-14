@@ -300,7 +300,9 @@ public class Dtos {
     copySampleFields(from, dto, false);
 
     if (isDetailedSample(from)) {
-      dto.setSampleClassId(((DetailedSample) from).getSampleClass().getId());
+      DetailedSample detailed = (DetailedSample) from;
+      dto.setSampleClassId(detailed.getSampleClass().getId());
+      dto.setIdentityConsentLevel(getIdentityConsentLevel(detailed));
     }
     return dto;
   }
@@ -362,6 +364,7 @@ public class Dtos {
       dto.setParentId(from.getParent().getId());
       dto.setParentAlias(from.getParent().getAlias());
       dto.setParentTissueSampleClassId(from.getParent().getSampleClass().getId());
+      dto.setIdentityConsentLevel(getIdentityConsentLevel(from));
     }
     if (from.getGroupId() != null) {
       dto.setGroupId(from.getGroupId());
@@ -675,6 +678,8 @@ public class Dtos {
     dto.setDonorSex(from.getDonorSex().getLabel());
     if (from.getConsentLevel() != null) {
       dto.setConsentLevel(from.getConsentLevel().getLabel());
+      // set here too, so it can be checked consistently for all DetailedSampleDtos
+      dto.setIdentityConsentLevel(from.getConsentLevel().getLabel());
     }
     return dto;
   }
@@ -980,7 +985,23 @@ public class Dtos {
     if (from.getGroupDescription() != null) {
       dto.setGroupDescription(from.getGroupDescription());
     }
+    if (from.getSample() != null) {
+      dto.setIdentityConsentLevel(getIdentityConsentLevel((DetailedSample) from.getSample()));
+    }
     return dto;
+  }
+
+  private static String getIdentityConsentLevel(DetailedSample sample) {
+    SampleIdentity identity = null;
+    if (isIdentitySample(sample)) {
+      identity = (SampleIdentity) sample;
+    } else {
+      identity = LimsUtils.getParent(SampleIdentity.class, sample);
+    }
+    if (identity != null && identity.getConsentLevel() != null) {
+      return identity.getConsentLevel().getLabel();
+    }
+    return null;
   }
 
   public static DetailedLibrary toDetailedLibrary(DetailedLibraryDto from) {
@@ -1374,6 +1395,11 @@ public class Dtos {
       ldto.setPlatformType(from.getPlatformType().getKey());
     }
     dto.setLibrary(ldto);
+
+    Sample sample = from.getSample();
+    if (isDetailedSample(sample)) {
+      dto.setIdentityConsentLevel(getIdentityConsentLevel((DetailedSample) sample));
+    }
     return dto;
   }
 
