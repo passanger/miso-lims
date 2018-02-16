@@ -5,8 +5,8 @@ import java.util.Map;
 
 public enum ConsentLevel {
 
-  GRANTED("Granted"),
-  PROJECT_ONLY("Project-only"),
+  ALL_PROJECTS("All Projects"),
+  THIS_PROJECT("This Project"),
   REVOKED("Revoked");
 
   private static Map<String, ConsentLevel> byLabel;
