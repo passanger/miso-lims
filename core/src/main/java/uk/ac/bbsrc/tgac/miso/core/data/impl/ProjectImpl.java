@@ -195,12 +195,6 @@ public class ProjectImpl implements Serializable, Project {
   }
 
   @Override
-  @Deprecated
-  public Long getProjectId() {
-    return projectId;
-  }
-
-  @Override
   public Collection<Sample> getSamples() {
     return samples;
   }
@@ -243,12 +237,6 @@ public class ProjectImpl implements Serializable, Project {
   @Override
   public void setAlias(String alias) {
     this.alias = alias;
-  }
-
-  @Override
-  @Deprecated
-  public void setProjectId(Long projectId) {
-    this.projectId = projectId;
   }
 
   @Override

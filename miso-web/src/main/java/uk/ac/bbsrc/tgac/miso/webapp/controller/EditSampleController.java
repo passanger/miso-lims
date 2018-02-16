@@ -671,7 +671,7 @@ public class EditSampleController {
           throw new IllegalArgumentException("Requested project does not match sample project");
         }
 
-        Map<String, Sample> adjacentSamples = getAdjacentSamplesInProject(sample, sample.getProject().getProjectId());
+        Map<String, Sample> adjacentSamples = getAdjacentSamplesInProject(sample, sample.getProject().getId());
         if (!adjacentSamples.isEmpty()) {
           model.put("previousSample", adjacentSamples.get("previousSample"));
           model.put("nextSample", adjacentSamples.get("nextSample"));

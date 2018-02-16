@@ -42,12 +42,22 @@ import uk.ac.bbsrc.tgac.miso.core.security.SecurableByProfile;
  * @author Rob Davey
  * @since 0.0.2
  */
-public interface Project extends com.eaglegenomics.simlims.core.Project, Comparable<Project>, SecurableByProfile,
-    Deletable, Watchable, Nameable {
+public interface Project extends Comparable<Project>, SecurableByProfile, Deletable, Watchable, Nameable {
+
   /** Field PREFIX */
   public static final String PREFIX = "PRO";
+  
+  Date getCreationDate();
 
-  public void setId(long id);
+  String getDescription();
+
+  void setCreationDate(Date date);
+
+  void setDescription(String description);
+
+  void setName(String name);
+
+  void setId(long id);
 
   /**
    * Returns the alias of this Project object.

@@ -209,7 +209,7 @@ public class Dtos {
     dto.setAlias(from.getAlias());
     dto.setDescription(from.getDescription());
     dto.setPriority(from.getPriority());
-    dto.setParentProjectId(from.getParentProject().getProjectId());
+    dto.setParentProjectId(from.getParentProject().getId());
     dto.setCreatedById(from.getCreatedBy().getUserId());
     dto.setCreationDate(formatDateTime(from.getCreationDate()));
     dto.setUpdatedById(from.getUpdatedBy().getUserId());
@@ -325,7 +325,7 @@ public class Dtos {
       dto.setQcPassed(from.getQcPassed());
     }
     dto.setAlias(from.getAlias());
-    dto.setProjectId(from.getProject().getProjectId());
+    dto.setProjectId(from.getProject().getId());
     dto.setScientificName(from.getScientificName());
     dto.setTaxonIdentifier(from.getTaxonIdentifier());
     if (from.getVolume() != null) {
@@ -656,7 +656,7 @@ public class Dtos {
     to.setDiscarded(from.isDiscarded());
     if (from.getProjectId() != null) {
       to.setProject(new ProjectImpl());
-      to.getProject().setProjectId(from.getProjectId());
+      to.getProject().setId(from.getProjectId());
     }
     to.setBoxPosition((SampleBoxPosition) makeBoxablePosition(from, (SampleImpl) to));
     return to;
@@ -699,7 +699,7 @@ public class Dtos {
   public static SampleNumberPerProjectDto asDto(SampleNumberPerProject from) {
     SampleNumberPerProjectDto dto = new SampleNumberPerProjectDto();
     dto.setId(from.getId());
-    dto.setProjectId(from.getProject().getProjectId());
+    dto.setProjectId(from.getProject().getId());
     dto.setHighestSampleNumber(from.getHighestSampleNumber());
     dto.setPadding(from.getPadding());
     dto.setCreatedById(from.getCreatedBy().getUserId());
